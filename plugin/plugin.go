@@ -16,7 +16,7 @@ type Plugin struct {
 	goplugin.NetRPCUnsupportedPlugin
 	pluginV1.GatewayDPluginServiceServer
 
-	client *goplugin.Client
+	Client *goplugin.Client
 
 	ID          Identifier
 	Description string
