@@ -1,2 +1,3 @@
 # gatewayd-plugin-sdk
-GatewayD plugin SDK
+
+GatewayD SDK for building plugins.
