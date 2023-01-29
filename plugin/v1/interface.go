@@ -22,6 +22,15 @@ func GetPluginMap(pluginName string) map[string]goplugin.Plugin {
 	}
 }
 
+// GetPluginSetMap returns the PluginSet for the plugin.
+func GetPluginSetMap(plugins map[string]goplugin.Plugin) goplugin.PluginSet {
+	pluginSet := goplugin.PluginSet{}
+	for pluginName, plugin := range plugins {
+		pluginSet[pluginName] = plugin
+	}
+	return pluginSet
+}
+
 // Plugin is the interface that all plugins must implement.
 type Plugin struct {
 	goplugin.GRPCPlugin
