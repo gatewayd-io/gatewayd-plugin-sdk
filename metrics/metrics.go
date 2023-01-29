@@ -4,6 +4,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/hashicorp/go-hclog"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -19,7 +20,26 @@ type MetricsConfig struct {
 	Endpoint         string
 }
 
-func ExposeMetrics(metricsConfig MetricsConfig, logger hclog.Logger) {
+func NewMetricsConfig(config map[string]interface{}) *MetricsConfig {
+	metricsConfig := MetricsConfig{}
+	if enabled, ok := config["metricsEnabled"].(string); ok {
+		if enabled, err := strconv.ParseBool(enabled); err == nil {
+			metricsConfig.Enabled = enabled
+		} else {
+			return nil
+		}
+	}
+	if uds, ok := config["metricsUnixDomainSocket"].(string); ok {
+		metricsConfig.UnixDomainSocket = uds
+	}
+	if endpoint, ok := config["metricsEndpoint"].(string); ok {
+		metricsConfig.Endpoint = endpoint
+	}
+
+	return &metricsConfig
+}
+
+func ExposeMetrics(metricsConfig *MetricsConfig, logger hclog.Logger) {
 	logger.Info(
 		"Starting metrics server via HTTP over Unix domain socket",
 		"unixDomainSocket", metricsConfig.UnixDomainSocket,
