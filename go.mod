@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/hashicorp/go-hclog v1.4.0
 	github.com/hashicorp/go-plugin v1.4.8
+	github.com/jackc/pgx/v5 v5.2.0
 	github.com/prometheus/client_golang v1.14.0
 	google.golang.org/grpc v1.52.3
 	google.golang.org/protobuf v1.28.1
