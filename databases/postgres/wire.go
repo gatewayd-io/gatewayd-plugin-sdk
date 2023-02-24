@@ -98,7 +98,7 @@ func HandleClientMessage(req *structpb.Struct, logger hclog.Logger) (*structpb.S
 	} else {
 		// Handle other messages
 		message, err := pgBackend.Receive()
-		if err != nil && !errors.Is(err, io.ErrUnexpectedEOF) {
+		if err != nil && !errors.Is(err, io.ErrUnexpectedEOF) && !errors.Is(err, io.EOF) {
 			// Truly an invalid message
 			logger.Error("Cannot receive message", "error", err)
 			return req, nil
