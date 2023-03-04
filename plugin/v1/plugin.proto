@@ -4,7 +4,7 @@ package plugin.v1;
 
 import "google/protobuf/struct.proto";
 
-option go_package = "github.com/gatewayd-io/gatewayd/plugin/shared/plugin/v1";
+option go_package = "github.com/gatewayd-io/gatewayd-plugin-sdk/plugin/v1";
 
 service GatewayDPluginService {
     // GetPluginConfig returns the plugin config upon registration
