@@ -29,6 +29,7 @@ type GatewayDPluginServiceClient interface {
 	OnConfigLoaded(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
 	OnNewLogger(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
 	OnNewPool(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	OnNewClient(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
 	OnNewProxy(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
 	OnNewServer(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
 	OnSignal(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
@@ -46,7 +47,6 @@ type GatewayDPluginServiceClient interface {
 	OnTrafficToClient(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
 	OnShutdown(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
 	OnTick(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
-	OnNewClient(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
 	OnHook(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
 }
 
@@ -88,6 +88,15 @@ func (c *gatewayDPluginServiceClient) OnNewLogger(ctx context.Context, in *struc
 func (c *gatewayDPluginServiceClient) OnNewPool(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error) {
 	out := new(structpb.Struct)
 	err := c.cc.Invoke(ctx, "/plugin.v1.GatewayDPluginService/OnNewPool", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gatewayDPluginServiceClient) OnNewClient(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error) {
+	out := new(structpb.Struct)
+	err := c.cc.Invoke(ctx, "/plugin.v1.GatewayDPluginService/OnNewClient", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -247,15 +256,6 @@ func (c *gatewayDPluginServiceClient) OnTick(ctx context.Context, in *structpb.S
 	return out, nil
 }
 
-func (c *gatewayDPluginServiceClient) OnNewClient(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error) {
-	out := new(structpb.Struct)
-	err := c.cc.Invoke(ctx, "/plugin.v1.GatewayDPluginService/OnNewClient", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *gatewayDPluginServiceClient) OnHook(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error) {
 	out := new(structpb.Struct)
 	err := c.cc.Invoke(ctx, "/plugin.v1.GatewayDPluginService/OnHook", in, out, opts...)
@@ -275,6 +275,7 @@ type GatewayDPluginServiceServer interface {
 	OnConfigLoaded(context.Context, *structpb.Struct) (*structpb.Struct, error)
 	OnNewLogger(context.Context, *structpb.Struct) (*structpb.Struct, error)
 	OnNewPool(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	OnNewClient(context.Context, *structpb.Struct) (*structpb.Struct, error)
 	OnNewProxy(context.Context, *structpb.Struct) (*structpb.Struct, error)
 	OnNewServer(context.Context, *structpb.Struct) (*structpb.Struct, error)
 	OnSignal(context.Context, *structpb.Struct) (*structpb.Struct, error)
@@ -292,7 +293,6 @@ type GatewayDPluginServiceServer interface {
 	OnTrafficToClient(context.Context, *structpb.Struct) (*structpb.Struct, error)
 	OnShutdown(context.Context, *structpb.Struct) (*structpb.Struct, error)
 	OnTick(context.Context, *structpb.Struct) (*structpb.Struct, error)
-	OnNewClient(context.Context, *structpb.Struct) (*structpb.Struct, error)
 	OnHook(context.Context, *structpb.Struct) (*structpb.Struct, error)
 	mustEmbedUnimplementedGatewayDPluginServiceServer()
 }
@@ -312,6 +312,9 @@ func (UnimplementedGatewayDPluginServiceServer) OnNewLogger(context.Context, *st
 }
 func (UnimplementedGatewayDPluginServiceServer) OnNewPool(context.Context, *structpb.Struct) (*structpb.Struct, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OnNewPool not implemented")
+}
+func (UnimplementedGatewayDPluginServiceServer) OnNewClient(context.Context, *structpb.Struct) (*structpb.Struct, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OnNewClient not implemented")
 }
 func (UnimplementedGatewayDPluginServiceServer) OnNewProxy(context.Context, *structpb.Struct) (*structpb.Struct, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OnNewProxy not implemented")
@@ -363,9 +366,6 @@ func (UnimplementedGatewayDPluginServiceServer) OnShutdown(context.Context, *str
 }
 func (UnimplementedGatewayDPluginServiceServer) OnTick(context.Context, *structpb.Struct) (*structpb.Struct, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OnTick not implemented")
-}
-func (UnimplementedGatewayDPluginServiceServer) OnNewClient(context.Context, *structpb.Struct) (*structpb.Struct, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OnNewClient not implemented")
 }
 func (UnimplementedGatewayDPluginServiceServer) OnHook(context.Context, *structpb.Struct) (*structpb.Struct, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OnHook not implemented")
@@ -451,6 +451,24 @@ func _GatewayDPluginService_OnNewPool_Handler(srv interface{}, ctx context.Conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GatewayDPluginServiceServer).OnNewPool(ctx, req.(*structpb.Struct))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GatewayDPluginService_OnNewClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(structpb.Struct)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GatewayDPluginServiceServer).OnNewClient(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/plugin.v1.GatewayDPluginService/OnNewClient",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GatewayDPluginServiceServer).OnNewClient(ctx, req.(*structpb.Struct))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -761,24 +779,6 @@ func _GatewayDPluginService_OnTick_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GatewayDPluginService_OnNewClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(structpb.Struct)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GatewayDPluginServiceServer).OnNewClient(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/plugin.v1.GatewayDPluginService/OnNewClient",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GatewayDPluginServiceServer).OnNewClient(ctx, req.(*structpb.Struct))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _GatewayDPluginService_OnHook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(structpb.Struct)
 	if err := dec(in); err != nil {
@@ -819,6 +819,10 @@ var GatewayDPluginService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OnNewPool",
 			Handler:    _GatewayDPluginService_OnNewPool_Handler,
+		},
+		{
+			MethodName: "OnNewClient",
+			Handler:    _GatewayDPluginService_OnNewClient_Handler,
 		},
 		{
 			MethodName: "OnNewProxy",
@@ -887,10 +891,6 @@ var GatewayDPluginService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OnTick",
 			Handler:    _GatewayDPluginService_OnTick_Handler,
-		},
-		{
-			MethodName: "OnNewClient",
-			Handler:    _GatewayDPluginService_OnNewClient_Handler,
 		},
 		{
 			MethodName: "OnHook",
