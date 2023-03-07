@@ -77,7 +77,7 @@ message PluginConfig {
     // internal and external config options
     map<string, string> config = 6;
     // hooks it attaches to
-    repeated string hooks = 7;
+    repeated HookName hooks = 7;
     // required plugins
     map<string, string> requires = 8;
     repeated string tags = 9;
