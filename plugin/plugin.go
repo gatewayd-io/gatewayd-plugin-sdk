@@ -30,7 +30,7 @@ type Plugin struct {
 	// internal and external config options
 	Config map[string]string
 	// hooks it attaches to
-	Hooks    []string
+	Hooks    []pluginV1.HookName
 	Priority Priority
 	// required plugins to be loaded before this one
 	// Built-in plugins are always loaded first
