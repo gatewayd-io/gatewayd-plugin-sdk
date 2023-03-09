@@ -1,8 +1,11 @@
 package plugin
 
 import (
+	"math"
+
 	pluginV1 "github.com/gatewayd-io/gatewayd-plugin-sdk/plugin/v1"
 	goplugin "github.com/hashicorp/go-plugin"
+	"google.golang.org/grpc"
 )
 
 type Identifier struct {
@@ -37,4 +40,12 @@ type Plugin struct {
 	Requires   []Identifier
 	Tags       []string
 	Categories []string
+}
+
+func DefaultGRPCServer(opts []grpc.ServerOption) *grpc.Server {
+	// Increase the max message size to 2GB.
+	opts = append(opts,
+		grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32)),
+		grpc.WithDefaultCallOptions(grpc.MaxCallSendMsgSize(math.MaxInt32)))
+	return grpc.NewServer(opts...)
 }
