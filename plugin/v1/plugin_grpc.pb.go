@@ -53,26 +53,47 @@ type GatewayDPluginServiceClient interface {
 	GetPluginConfig(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
 	// OnConfigLoaded is called when the config is loaded from any config provider
 	OnConfigLoaded(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnNewLogger is called when a new logger is created
 	OnNewLogger(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnNewPool is called when a new pool is created
 	OnNewPool(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnNewClient is called when a new client is created
 	OnNewClient(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnNewProxy is called when a new proxy is created
 	OnNewProxy(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnNewServer is called when a new server is created
 	OnNewServer(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnSignal is called when an OS signal is received
 	OnSignal(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnRun is called when the gatewayd server is running
 	OnRun(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnBooting is called when the gatewayd server is booting
 	OnBooting(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnBooted is called when the gatewayd server is booted
 	OnBooted(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnOpening is called when the gatewayd server is opening
 	OnOpening(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnOpened is called when the gatewayd server is opened
 	OnOpened(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnClosing is called when the gatewayd server is closing
 	OnClosing(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnClosed is called when the gatewayd server is closed
 	OnClosed(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnTraffic is called when the gatewayd server received traffic from a client
 	OnTraffic(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnTrafficFromClient is called when the gatewayd server is receiving traffic from a client
 	OnTrafficFromClient(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnTrafficToServer is called when the gatewayd server is sending traffic to a server
 	OnTrafficToServer(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnTrafficFromServer is called when the gatewayd server is receiving traffic from a server
 	OnTrafficFromServer(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnTrafficToClient is called when the gatewayd server is sending traffic to a client
 	OnTrafficToClient(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnShutdown is called when the gatewayd server is shutting down
 	OnShutdown(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnTick is called when the gatewayd server is ticking
 	OnTick(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
+	// OnHook is called when the gatewayd server is calling a custom hook
 	OnHook(ctx context.Context, in *structpb.Struct, opts ...grpc.CallOption) (*structpb.Struct, error)
 }
 
@@ -299,26 +320,47 @@ type GatewayDPluginServiceServer interface {
 	GetPluginConfig(context.Context, *structpb.Struct) (*structpb.Struct, error)
 	// OnConfigLoaded is called when the config is loaded from any config provider
 	OnConfigLoaded(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnNewLogger is called when a new logger is created
 	OnNewLogger(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnNewPool is called when a new pool is created
 	OnNewPool(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnNewClient is called when a new client is created
 	OnNewClient(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnNewProxy is called when a new proxy is created
 	OnNewProxy(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnNewServer is called when a new server is created
 	OnNewServer(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnSignal is called when an OS signal is received
 	OnSignal(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnRun is called when the gatewayd server is running
 	OnRun(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnBooting is called when the gatewayd server is booting
 	OnBooting(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnBooted is called when the gatewayd server is booted
 	OnBooted(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnOpening is called when the gatewayd server is opening
 	OnOpening(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnOpened is called when the gatewayd server is opened
 	OnOpened(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnClosing is called when the gatewayd server is closing
 	OnClosing(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnClosed is called when the gatewayd server is closed
 	OnClosed(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnTraffic is called when the gatewayd server received traffic from a client
 	OnTraffic(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnTrafficFromClient is called when the gatewayd server is receiving traffic from a client
 	OnTrafficFromClient(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnTrafficToServer is called when the gatewayd server is sending traffic to a server
 	OnTrafficToServer(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnTrafficFromServer is called when the gatewayd server is receiving traffic from a server
 	OnTrafficFromServer(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnTrafficToClient is called when the gatewayd server is sending traffic to a client
 	OnTrafficToClient(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnShutdown is called when the gatewayd server is shutting down
 	OnShutdown(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnTick is called when the gatewayd server is ticking
 	OnTick(context.Context, *structpb.Struct) (*structpb.Struct, error)
+	// OnHook is called when the gatewayd server is calling a custom hook
 	OnHook(context.Context, *structpb.Struct) (*structpb.Struct, error)
 	mustEmbedUnimplementedGatewayDPluginServiceServer()
 }
