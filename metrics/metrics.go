@@ -20,6 +20,7 @@ type MetricsConfig struct {
 	Endpoint         string
 }
 
+// NewMetricsConfig returns a new MetricsConfig struct.
 func NewMetricsConfig(config map[string]interface{}) *MetricsConfig {
 	metricsConfig := MetricsConfig{}
 	if enabled, ok := config["metricsEnabled"].(string); ok {
@@ -39,6 +40,7 @@ func NewMetricsConfig(config map[string]interface{}) *MetricsConfig {
 	return &metricsConfig
 }
 
+// ExposeMetrics exposes the Prometheus metrics via HTTP over Unix domain socket.
 func ExposeMetrics(metricsConfig *MetricsConfig, logger hclog.Logger) {
 	logger.Info(
 		"Starting metrics server via HTTP over Unix domain socket",

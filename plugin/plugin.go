@@ -42,6 +42,7 @@ type Plugin struct {
 	Categories []string
 }
 
+// DefaultGRPCServer returns a gRPC server with a 2GB max message size.
 func DefaultGRPCServer(opts []grpc.ServerOption) *grpc.Server {
 	// Increase the max message size to 2GB.
 	opts = append(opts, []grpc.ServerOption{

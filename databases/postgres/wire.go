@@ -41,8 +41,8 @@ func IsPostgresStartupMessage(b []byte) bool {
 }
 
 // DecodeBytes decodes a base64 encoded string to bytes.
-func DecodeBytes(v string) []byte {
-	valueBytes, err := base64.StdEncoding.DecodeString(v)
+func DecodeBytes(encoded string) []byte {
+	valueBytes, err := base64.StdEncoding.DecodeString(encoded)
 	if err != nil {
 		return []byte{}
 	}
