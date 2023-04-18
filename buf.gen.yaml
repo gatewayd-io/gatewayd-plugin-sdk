@@ -8,6 +8,9 @@ plugins:
   - name: go
     out: .
     opt: paths=source_relative
+  - plugin: buf.build/community/pseudomuto-doc
+    out: plugin/v1
+    opt: markdown,plugin.md
   # - name: python_betterproto
   #   out: .
   # - name: java
