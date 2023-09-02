@@ -2,79 +2,79 @@ syntax = "proto3";
 
 package plugin.v1;
 
-import "google/protobuf/struct.proto";
+import "plugin/v1/struct.proto";
 
 option go_package = "github.com/gatewayd-io/gatewayd-plugin-sdk/plugin/v1";
 
 service GatewayDPluginService {
     // GetPluginConfig returns the plugin config upon registration
-    rpc GetPluginConfig (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc GetPluginConfig (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnConfigLoaded is called when the config is loaded from any config provider
-    rpc OnConfigLoaded (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnConfigLoaded (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnNewLogger is called when a new logger is created
-    rpc OnNewLogger (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnNewLogger (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnNewPool is called when a new pool is created
-    rpc OnNewPool (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnNewPool (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnNewClient is called when a new client is created
-    rpc OnNewClient (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnNewClient (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnNewProxy is called when a new proxy is created
-    rpc OnNewProxy (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnNewProxy (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnNewServer is called when a new server is created
-    rpc OnNewServer (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnNewServer (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnSignal is called when an OS signal is received
-    rpc OnSignal (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnSignal (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnRun is called when the gatewayd server is running
-    rpc OnRun (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnRun (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnBooting is called when the gatewayd server is booting
-    rpc OnBooting (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnBooting (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnBooted is called when the gatewayd server is booted
-    rpc OnBooted (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnBooted (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnOpening is called when the gatewayd server is opening
-    rpc OnOpening (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnOpening (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnOpened is called when the gatewayd server is opened
-    rpc OnOpened (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnOpened (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnClosing is called when the gatewayd server is closing
-    rpc OnClosing (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnClosing (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnClosed is called when the gatewayd server is closed
-    rpc OnClosed (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnClosed (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnTraffic is called when the gatewayd server received traffic from a client
-    rpc OnTraffic (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnTraffic (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnTrafficFromClient is called when the gatewayd server is receiving traffic from a client
-    rpc OnTrafficFromClient (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnTrafficFromClient (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnTrafficToServer is called when the gatewayd server is sending traffic to a server
-    rpc OnTrafficToServer (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnTrafficToServer (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnTrafficFromServer is called when the gatewayd server is receiving traffic from a server
-    rpc OnTrafficFromServer (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnTrafficFromServer (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnTrafficToClient is called when the gatewayd server is sending traffic to a client
-    rpc OnTrafficToClient (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnTrafficToClient (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnShutdown is called when the gatewayd server is shutting down
-    rpc OnShutdown (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnShutdown (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnTick is called when the gatewayd server is ticking
-    rpc OnTick (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnTick (plugin.v1.Struct) returns (plugin.v1.Struct);
 
     // OnHook is called when the gatewayd server is calling a custom hook
-    rpc OnHook (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnHook (plugin.v1.Struct) returns (plugin.v1.Struct);
 }
 
 enum HookName {
