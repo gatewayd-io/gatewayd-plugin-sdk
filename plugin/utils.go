@@ -1,8 +1,8 @@
 package plugin
 
-import "google.golang.org/protobuf/types/known/structpb"
+import v1 "github.com/gatewayd-io/gatewayd-plugin-sdk/plugin/v1"
 
-func GetAttr(req *structpb.Struct, key string, defaultValue interface{}) interface{} {
+func GetAttr(req *v1.Struct, key string, defaultValue interface{}) interface{} {
 	if req == nil {
 		return defaultValue
 	}

@@ -3,8 +3,8 @@ package plugin
 import (
 	"context"
 
+	v1 "github.com/gatewayd-io/gatewayd-plugin-sdk/plugin/v1"
 	"google.golang.org/grpc"
-	"google.golang.org/protobuf/types/known/structpb"
 )
 
 type (
@@ -12,5 +12,5 @@ type (
 	// Smaller values are executed first (higher priority).
 	Priority uint
 	Method   func(
-		context.Context, *structpb.Struct, ...grpc.CallOption) (*structpb.Struct, error)
+		context.Context, *v1.Struct, ...grpc.CallOption) (*v1.Struct, error)
 )
