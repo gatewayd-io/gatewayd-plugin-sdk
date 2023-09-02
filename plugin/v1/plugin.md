@@ -3,6 +3,14 @@
 
 ## Table of Contents
 
+- [plugin/v1/struct.proto](#plugin_v1_struct-proto)
+    - [ListValue](#plugin-v1-ListValue)
+    - [Struct](#plugin-v1-Struct)
+    - [Struct.FieldsEntry](#plugin-v1-Struct-FieldsEntry)
+    - [Value](#plugin-v1-Value)
+  
+    - [NullValue](#plugin-v1-NullValue)
+  
 - [plugin/v1/plugin.proto](#plugin_v1_plugin-proto)
     - [PluginConfig](#plugin-v1-PluginConfig)
     - [PluginConfig.ConfigEntry](#plugin-v1-PluginConfig-ConfigEntry)
@@ -14,6 +22,118 @@
     - [GatewayDPluginService](#plugin-v1-GatewayDPluginService)
   
 - [Scalar Value Types](#scalar-value-types)
+
+
+
+<a name="plugin_v1_struct-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## plugin/v1/struct.proto
+
+
+
+<a name="plugin-v1-ListValue"></a>
+
+### ListValue
+`ListValue` is a wrapper around a repeated field of values.
+
+The JSON representation for `ListValue` is JSON array.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| values | [Value](#plugin-v1-Value) | repeated | Repeated field of dynamically typed values. |
+
+
+
+
+
+
+<a name="plugin-v1-Struct"></a>
+
+### Struct
+`Struct` represents a structured data value, consisting of fields
+which map to dynamically typed values. In some languages, `Struct`
+might be supported by a native representation. For example, in
+scripting languages like JS a struct is represented as an
+object. The details of that representation are described together
+with the proto support for the language.
+
+The JSON representation for `Struct` is JSON object plus the
+bytes type.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| fields | [Struct.FieldsEntry](#plugin-v1-Struct-FieldsEntry) | repeated | Unordered map of dynamically typed values. |
+
+
+
+
+
+
+<a name="plugin-v1-Struct-FieldsEntry"></a>
+
+### Struct.FieldsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [Value](#plugin-v1-Value) |  |  |
+
+
+
+
+
+
+<a name="plugin-v1-Value"></a>
+
+### Value
+`Value` represents a dynamically typed value which can be either
+null, a number, a string, a boolean, a recursive struct value, or a
+list of values. A producer of value is expected to set one of these
+variants. Absence of any variant indicates an error.
+
+The JSON representation for `Value` is JSON value.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| null_value | [NullValue](#plugin-v1-NullValue) |  | Represents a null value. |
+| number_value | [double](#double) |  | Represents a double value. |
+| string_value | [string](#string) |  | Represents a string value. |
+| bool_value | [bool](#bool) |  | Represents a boolean value. |
+| struct_value | [Struct](#plugin-v1-Struct) |  | Represents a structured value. |
+| list_value | [ListValue](#plugin-v1-ListValue) |  | Represents a repeated `Value`. |
+| bytes_value | [bytes](#bytes) |  | Represents a bytes value. |
+
+
+
+
+
+ 
+
+
+<a name="plugin-v1-NullValue"></a>
+
+### NullValue
+`NullValue` is a singleton enumeration to represent the null value for the
+`Value` type union.
+
+The JSON representation for `NullValue` is JSON `null`.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| NULL_VALUE | 0 | Null value. |
+
+
+ 
+
+ 
+
+ 
 
 
 
@@ -144,29 +264,29 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetPluginConfig | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | GetPluginConfig returns the plugin config upon registration |
-| OnConfigLoaded | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnConfigLoaded is called when the config is loaded from any config provider |
-| OnNewLogger | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnNewLogger is called when a new logger is created |
-| OnNewPool | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnNewPool is called when a new pool is created |
-| OnNewClient | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnNewClient is called when a new client is created |
-| OnNewProxy | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnNewProxy is called when a new proxy is created |
-| OnNewServer | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnNewServer is called when a new server is created |
-| OnSignal | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnSignal is called when an OS signal is received |
-| OnRun | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnRun is called when the gatewayd server is running |
-| OnBooting | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnBooting is called when the gatewayd server is booting |
-| OnBooted | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnBooted is called when the gatewayd server is booted |
-| OnOpening | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnOpening is called when the gatewayd server is opening |
-| OnOpened | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnOpened is called when the gatewayd server is opened |
-| OnClosing | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnClosing is called when the gatewayd server is closing |
-| OnClosed | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnClosed is called when the gatewayd server is closed |
-| OnTraffic | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnTraffic is called when the gatewayd server received traffic from a client |
-| OnTrafficFromClient | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnTrafficFromClient is called when the gatewayd server is receiving traffic from a client |
-| OnTrafficToServer | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnTrafficToServer is called when the gatewayd server is sending traffic to a server |
-| OnTrafficFromServer | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnTrafficFromServer is called when the gatewayd server is receiving traffic from a server |
-| OnTrafficToClient | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnTrafficToClient is called when the gatewayd server is sending traffic to a client |
-| OnShutdown | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnShutdown is called when the gatewayd server is shutting down |
-| OnTick | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnTick is called when the gatewayd server is ticking |
-| OnHook | [.google.protobuf.Struct](#google-protobuf-Struct) | [.google.protobuf.Struct](#google-protobuf-Struct) | OnHook is called when the gatewayd server is calling a custom hook |
+| GetPluginConfig | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | GetPluginConfig returns the plugin config upon registration |
+| OnConfigLoaded | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnConfigLoaded is called when the config is loaded from any config provider |
+| OnNewLogger | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnNewLogger is called when a new logger is created |
+| OnNewPool | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnNewPool is called when a new pool is created |
+| OnNewClient | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnNewClient is called when a new client is created |
+| OnNewProxy | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnNewProxy is called when a new proxy is created |
+| OnNewServer | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnNewServer is called when a new server is created |
+| OnSignal | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnSignal is called when an OS signal is received |
+| OnRun | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnRun is called when the gatewayd server is running |
+| OnBooting | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnBooting is called when the gatewayd server is booting |
+| OnBooted | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnBooted is called when the gatewayd server is booted |
+| OnOpening | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnOpening is called when the gatewayd server is opening |
+| OnOpened | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnOpened is called when the gatewayd server is opened |
+| OnClosing | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnClosing is called when the gatewayd server is closing |
+| OnClosed | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnClosed is called when the gatewayd server is closed |
+| OnTraffic | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnTraffic is called when the gatewayd server received traffic from a client |
+| OnTrafficFromClient | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnTrafficFromClient is called when the gatewayd server is receiving traffic from a client |
+| OnTrafficToServer | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnTrafficToServer is called when the gatewayd server is sending traffic to a server |
+| OnTrafficFromServer | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnTrafficFromServer is called when the gatewayd server is receiving traffic from a server |
+| OnTrafficToClient | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnTrafficToClient is called when the gatewayd server is sending traffic to a client |
+| OnShutdown | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnShutdown is called when the gatewayd server is shutting down |
+| OnTick | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnTick is called when the gatewayd server is ticking |
+| OnHook | [Struct](#plugin-v1-Struct) | [Struct](#plugin-v1-Struct) | OnHook is called when the gatewayd server is calling a custom hook |
 
  
 

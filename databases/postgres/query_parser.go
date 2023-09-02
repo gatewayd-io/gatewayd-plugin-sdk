@@ -1,7 +1,7 @@
 package postgres
 
 import (
-	"encoding/base64"
+	"fmt"
 
 	pgQuery "github.com/pganalyze/pg_query_go/v2"
 )
@@ -9,10 +9,13 @@ import (
 const MinPgSQLMessageLength = 5
 
 // GetQueryFromRequest decodes the request and returns the query.
-func GetQueryFromRequest(req string) (string, error) {
-	requestDecoded, err := base64.StdEncoding.DecodeString(req)
-	if err != nil {
-		return "", err
+func GetQueryFromRequest(req interface{}) (string, error) {
+	var requestDecoded []byte
+
+	if req, ok := req.([]byte); ok {
+		requestDecoded = req
+	} else {
+		return "", fmt.Errorf("unknown request type: %T", req)
 	}
 
 	if len(requestDecoded) < MinPgSQLMessageLength {
