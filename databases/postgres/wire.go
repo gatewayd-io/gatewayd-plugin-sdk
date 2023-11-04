@@ -3,6 +3,7 @@ package postgres
 import (
 	"bytes"
 	"encoding/base64"
+	"encoding/binary"
 	"encoding/json"
 	"errors"
 	"io"
@@ -35,6 +36,23 @@ func IsPostgresStartupMessage(b []byte) bool {
 		if len(b) != 0 && b[0] == v {
 			return false
 		}
+	}
+
+	return true
+}
+
+// IsPostgresSSLRequest returns true if the message is a SSL request.
+func IsPostgresSSLRequest(b []byte) bool {
+	if len(b) < 8 {
+		return false
+	}
+
+	if binary.BigEndian.Uint32(b[0:4]) != 8 {
+		return false
+	}
+
+	if binary.BigEndian.Uint32(b[4:8]) != 80877103 {
+		return false
 	}
 
 	return true
