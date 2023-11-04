@@ -41,6 +41,15 @@ func IsPostgresStartupMessage(b []byte) bool {
 	return true
 }
 
+func ErrorResponse(msg, severity, code, detail string) []byte {
+	return (&pgproto3.ErrorResponse{
+		Severity: severity,
+		Message:  msg,
+		Code:     code,
+		Detail:   detail,
+	}).Encode(nil)
+}
+
 // IsPostgresSSLRequest returns true if the message is a SSL request.
 func IsPostgresSSLRequest(b []byte) bool {
 	if len(b) < 8 {
