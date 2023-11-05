@@ -122,7 +122,7 @@ func GetTablesFromQuery(query string) ([]string, error) {
 		if dropTable := stmt.Stmt.GetDropStmt(); dropTable != nil {
 			for _, object := range dropTable.GetObjects() {
 				for _, table := range object.GetList().GetItems() {
-					tables = append(tables, table.GetString_().Str)
+					tables = append(tables, table.String())
 				}
 			}
 		}
