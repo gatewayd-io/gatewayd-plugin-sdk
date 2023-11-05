@@ -6,7 +6,7 @@ require (
 	github.com/hashicorp/go-hclog v1.5.0
 	github.com/hashicorp/go-plugin v1.5.2
 	github.com/jackc/pgx/v5 v5.4.3
-	github.com/pganalyze/pg_query_go/v2 v2.2.0
+	github.com/pganalyze/pg_query_go/v4 v4.2.3
 	github.com/prometheus/client_golang v1.17.0
 	github.com/stretchr/testify v1.8.1
 	google.golang.org/grpc v1.59.0

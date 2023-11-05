@@ -3,7 +3,7 @@ package postgres
 import (
 	"fmt"
 
-	pgQuery "github.com/pganalyze/pg_query_go/v2"
+	pgQuery "github.com/pganalyze/pg_query_go/v4"
 )
 
 const MinPgSQLMessageLength = 5
