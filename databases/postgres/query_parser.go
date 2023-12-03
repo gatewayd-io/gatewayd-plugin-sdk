@@ -3,7 +3,8 @@ package postgres
 import (
 	"fmt"
 
-	pgQuery "github.com/pganalyze/pg_query_go/v4"
+	pgAnalyze "github.com/pganalyze/pg_query_go/v4"
+	pgQuery "github.com/wasilibs/go-pgquery"
 )
 
 const MinPgSQLMessageLength = 5
@@ -32,14 +33,14 @@ func GetQueryFromRequest(req interface{}) (string, error) {
 }
 
 // isMulti checks if the query is a union, intersect, or except.
-func isMulti(stmt *pgQuery.SelectStmt) bool {
-	return stmt.GetOp() == pgQuery.SetOperation_SETOP_UNION ||
-		stmt.GetOp() == pgQuery.SetOperation_SETOP_INTERSECT ||
-		stmt.GetOp() == pgQuery.SetOperation_SETOP_EXCEPT
+func isMulti(stmt *pgAnalyze.SelectStmt) bool {
+	return stmt.GetOp() == pgAnalyze.SetOperation_SETOP_UNION ||
+		stmt.GetOp() == pgAnalyze.SetOperation_SETOP_INTERSECT ||
+		stmt.GetOp() == pgAnalyze.SetOperation_SETOP_EXCEPT
 }
 
 // getSingleTable returns the tables used in a query.
-func getSingleTable(stmt *pgQuery.SelectStmt) []string {
+func getSingleTable(stmt *pgAnalyze.SelectStmt) []string {
 	tables := []string{}
 	for _, from := range stmt.FromClause {
 		rangeVar := from.GetRangeVar()
@@ -52,7 +53,7 @@ func getSingleTable(stmt *pgQuery.SelectStmt) []string {
 }
 
 // getMultiTable returns the tables used in a union, intersect, or except query.
-func getMultiTable(stmt *pgQuery.SelectStmt) []string {
+func getMultiTable(stmt *pgAnalyze.SelectStmt) []string {
 	tables := []string{}
 	// Get the tables from the left side.
 	left := stmt.GetLarg()
