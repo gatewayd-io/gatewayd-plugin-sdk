@@ -3,7 +3,7 @@ package postgres
 import (
 	"fmt"
 
-	pgAnalyze "github.com/pganalyze/pg_query_go/v4"
+	pgAnalyze "github.com/pganalyze/pg_query_go/v5"
 	pgQuery "github.com/wasilibs/go-pgquery"
 )
 
@@ -13,8 +13,8 @@ const MinPgSQLMessageLength = 5
 func GetQueryFromRequest(req interface{}) (string, error) {
 	var requestDecoded []byte
 
-	if req, ok := req.([]byte); ok {
-		requestDecoded = req
+	if request, ok := req.([]byte); ok {
+		requestDecoded = request
 	} else {
 		return "", fmt.Errorf("unknown request type: %T", req)
 	}
