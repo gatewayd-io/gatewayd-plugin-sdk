@@ -1,6 +1,9 @@
 package logging
 
-import "github.com/hashicorp/go-hclog"
+import (
+	"github.com/hashicorp/go-hclog"
+	"github.com/rs/zerolog"
+)
 
 // GetLogLevel returns the hclog level based on the string passed in.
 func GetLogLevel(logLevel string) hclog.Level {
@@ -19,5 +22,29 @@ func GetLogLevel(logLevel string) hclog.Level {
 		return hclog.Off
 	default:
 		return hclog.NoLevel
+	}
+}
+
+// GetZeroLogLevel returns the zerolog level based on the string passed in.
+func GetZeroLogLevel(logLevel string) zerolog.Level {
+	switch logLevel {
+	case "trace":
+		return zerolog.TraceLevel
+	case "debug":
+		return zerolog.DebugLevel
+	case "info":
+		return zerolog.InfoLevel
+	case "warn":
+		return zerolog.WarnLevel
+	case "error":
+		return zerolog.ErrorLevel
+	case "fatal":
+		return zerolog.FatalLevel
+	case "panic":
+		return zerolog.PanicLevel
+	case "disabled":
+		return zerolog.Disabled
+	default:
+		return zerolog.NoLevel
 	}
 }
