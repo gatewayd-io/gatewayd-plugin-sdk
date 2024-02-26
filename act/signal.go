@@ -12,6 +12,10 @@ func (s *Signal) ToMap() map[string]any {
 	}
 }
 
+func Passthrough() *Signal {
+	return &Signal{Name: "passthrough", Metadata: nil}
+}
+
 func Terminate() *Signal {
 	return &Signal{
 		Name: "terminate",
