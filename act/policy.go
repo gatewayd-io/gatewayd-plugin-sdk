@@ -5,12 +5,11 @@ import (
 
 	"github.com/expr-lang/expr"
 	"github.com/expr-lang/expr/vm"
-	"github.com/spf13/cast"
 )
 
 type IPolicy interface {
 	MustCompile(opts ...expr.Option) error
-	Eval(ctx context.Context, input Input) (bool, error)
+	Eval(ctx context.Context, input Input) (any, error)
 }
 
 type Policy struct {
@@ -37,13 +36,13 @@ func (p *Policy) MustCompile(extraOpts ...expr.Option) error {
 	return nil
 }
 
-func (p *Policy) Eval(ctx context.Context, input Input) (bool, error) {
+func (p *Policy) Eval(ctx context.Context, input Input) (any, error) {
 	output, err := expr.Run(p.prg, input)
 	if err != nil {
 		return false, err
 	}
 
-	return cast.ToBool(output), nil
+	return output, nil
 }
 
 func MustNewPolicy(
