@@ -10,7 +10,7 @@ type Input struct {
 type Output struct {
 	MatchedPolicy string         `json:"matchedPolicy"`
 	Metadata      map[string]any `json:"metadata"`
-	Verdict       bool           `json:"verdict"`
+	Verdict       any            `json:"verdict"`
 	Terminal      bool           `json:"terminal"`
 	Sync          bool           `json:"sync"`
 }
