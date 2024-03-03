@@ -10,7 +10,6 @@ require (
 	github.com/pganalyze/pg_query_go/v5 v5.1.0
 	github.com/prometheus/client_golang v1.18.0
 	github.com/rs/zerolog v1.32.0
-	github.com/spf13/cast v1.6.0
 	github.com/stretchr/testify v1.8.4
 	github.com/wasilibs/go-pgquery v0.0.0-20240124010238-c9a912d768dc
 	google.golang.org/grpc v1.62.0
@@ -24,6 +23,7 @@ require (
 	github.com/fatih/color v1.16.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/hashicorp/yamux v0.1.1 // indirect
+	github.com/kr/text v0.2.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mitchellh/go-testing-interface v1.14.1 // indirect
