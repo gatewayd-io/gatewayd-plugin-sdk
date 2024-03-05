@@ -42,12 +42,16 @@ func IsPostgresStartupMessage(b []byte) bool {
 }
 
 func ErrorResponse(msg, severity, code, detail string) []byte {
-	return (&pgproto3.ErrorResponse{
+	// NOTE: The error from the Encode method can be safely ignored because
+	// the result will be nil on error. The parameters MUST be provided by us
+	// and they MUST NOT be filled with user input.
+	errResp, _ := (&pgproto3.ErrorResponse{
 		Severity: severity,
 		Message:  msg,
 		Code:     code,
 		Detail:   detail,
 	}).Encode(nil)
+	return errResp
 }
 
 // IsPostgresSSLRequest returns true if the message is a SSL request.

@@ -12,7 +12,8 @@ func testQueryRequest() (string, string) {
 	query := "SELECT * FROM users"
 	queryMsg := pgproto3.Query{String: query}
 	// Encode the data to base64.
-	return query, base64.StdEncoding.EncodeToString(queryMsg.Encode(nil))
+	queryBytes, _ := queryMsg.Encode(nil)
+	return query, base64.StdEncoding.EncodeToString(queryBytes)
 }
 
 func Test_GetQueryFromRequest(t *testing.T) {
