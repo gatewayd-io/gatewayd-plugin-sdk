@@ -18,5 +18,6 @@ type Action struct {
 	Metadata map[string]any `json:"metadata"`
 	Sync     bool           `json:"sync"`
 	Terminal bool           `json:"terminal"`
+	Timeout  int            `json:"timeout"`
 	Run      ActionFunc     `json:"-"`
 }
