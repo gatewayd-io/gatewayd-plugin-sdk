@@ -37,12 +37,26 @@ func (p *Policy) MustCompile(extraOpts ...expr.Option) error {
 }
 
 func (p *Policy) Eval(ctx context.Context, input Input) (any, error) {
-	output, err := expr.Run(p.prg, input)
-	if err != nil {
-		return false, err
-	}
+	result := make(chan interface{})
+	errChan := make(chan error)
 
-	return output, nil
+	go func() {
+		output, err := expr.Run(p.prg, input)
+		if err != nil {
+			errChan <- err
+			return
+		}
+		result <- output
+	}()
+
+	select {
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	case out := <-result:
+		return out, nil
+	case err := <-errChan:
+		return nil, err
+	}
 }
 
 func MustNewPolicy(
