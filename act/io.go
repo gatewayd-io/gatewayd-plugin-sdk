@@ -1,9 +1,17 @@
 package act
 
+type Hook struct {
+	Name     string         `json:"name"`
+	Priority uint           `json:"priority"`
+	Params   map[string]any `json:"params"`
+	Result   map[string]any `json:"result"`
+}
+
 type Input struct {
 	Name   string         `json:"name"`
 	Policy map[string]any `json:"policy"`
 	Signal map[string]any `json:"signal"`
+	Hook   Hook           `json:"hook"`
 	Sync   bool           `json:"sync"`
 }
 
