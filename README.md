@@ -13,4 +13,6 @@
     <a href="https://docs.gatewayd.io/developing-plugins/sdk-reference/">Documentation</a>
 </p>
 
-This is currently a work in progress and it evolves as we build more plugins. Feel free to contribute to this repository by opening an issue or a pull request.
+This SDK is built to develop GatewayD plugins. It provides a set of tools to decode database traffic, expose metrics and logs to be aggregated by GatewayD and more.
+
+Feel free to contribute to this repository by opening an issue or a pull request.
