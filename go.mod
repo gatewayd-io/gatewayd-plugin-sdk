@@ -12,9 +12,9 @@ require (
 	github.com/redis/go-redis/v9 v9.6.1
 	github.com/rs/zerolog v1.33.0
 	github.com/stretchr/testify v1.9.0
-	github.com/wasilibs/go-pgquery v0.0.0-20240826014338-9ea9e19d01fd
-	google.golang.org/grpc v1.67.0
-	google.golang.org/protobuf v1.34.2
+	github.com/wasilibs/go-pgquery v0.0.0-20241011013927-817756c5aae4
+	google.golang.org/grpc v1.67.1
+	google.golang.org/protobuf v1.35.1
 )
 
 require (
@@ -34,13 +34,13 @@ require (
 	github.com/oklog/run v1.1.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/prometheus/client_model v0.6.1 // indirect
-	github.com/prometheus/common v0.59.1 // indirect
+	github.com/prometheus/common v0.60.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
-	github.com/tetratelabs/wazero v1.8.0 // indirect
+	github.com/tetratelabs/wazero v1.8.1 // indirect
 	github.com/wasilibs/wazero-helpers v0.0.0-20240620070341-3dff1577cd52 // indirect
-	golang.org/x/net v0.29.0 // indirect
-	golang.org/x/sys v0.25.0 // indirect
-	golang.org/x/text v0.18.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240924160255-9d4c2d233b61 // indirect
+	golang.org/x/net v0.30.0 // indirect
+	golang.org/x/sys v0.26.0 // indirect
+	golang.org/x/text v0.19.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20241007155032-5fefd90f89a9 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
