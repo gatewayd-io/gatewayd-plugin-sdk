@@ -1,6 +1,4 @@
 version: v1
-# managed:
-#   enabled: true
 plugins:
   - name: go-grpc
     out: .
@@ -11,7 +9,3 @@ plugins:
   - plugin: buf.build/community/pseudomuto-doc
     out: plugin/v1
     opt: markdown,plugin.md
-  # - name: python_betterproto
-  #   out: .
-  # - name: java
-  #   out: .
