@@ -1,6 +1,6 @@
 module github.com/gatewayd-io/gatewayd-plugin-sdk
 
-go 1.23.5
+go 1.24
 
 require (
 	github.com/expr-lang/expr v1.16.9
