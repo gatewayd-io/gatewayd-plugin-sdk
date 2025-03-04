@@ -1,6 +1,6 @@
 module github.com/gatewayd-io/gatewayd-plugin-sdk
 
-go 1.23.5
+go 1.24
 
 require (
 	github.com/expr-lang/expr v1.16.9
@@ -8,13 +8,13 @@ require (
 	github.com/hashicorp/go-plugin v1.6.3
 	github.com/jackc/pgx/v5 v5.7.2
 	github.com/pganalyze/pg_query_go/v6 v6.0.0
-	github.com/prometheus/client_golang v1.20.5
-	github.com/redis/go-redis/v9 v9.7.0
+	github.com/prometheus/client_golang v1.21.1
+	github.com/redis/go-redis/v9 v9.7.1
 	github.com/rs/zerolog v1.33.0
 	github.com/stretchr/testify v1.10.0
-	github.com/wasilibs/go-pgquery v0.0.0-20241226024732-8bfaa0ac5969
-	google.golang.org/grpc v1.70.0
-	google.golang.org/protobuf v1.36.4
+	github.com/wasilibs/go-pgquery v0.0.0-20250219053243-148840c597e6
+	google.golang.org/grpc v1.71.0
+	google.golang.org/protobuf v1.36.5
 )
 
 require (
@@ -35,7 +35,7 @@ require (
 	github.com/prometheus/client_model v0.6.1 // indirect
 	github.com/prometheus/common v0.62.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
-	github.com/tetratelabs/wazero v1.8.2 // indirect
+	github.com/tetratelabs/wazero v1.9.0 // indirect
 	github.com/wasilibs/wazero-helpers v0.0.0-20250123031827-cd30c44769bb // indirect
 	golang.org/x/net v0.34.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect
