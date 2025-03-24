@@ -10,7 +10,7 @@ require (
 	github.com/pganalyze/pg_query_go/v6 v6.0.0
 	github.com/prometheus/client_golang v1.21.1
 	github.com/redis/go-redis/v9 v9.7.1
-	github.com/rs/zerolog v1.33.0
+	github.com/rs/zerolog v1.34.0
 	github.com/stretchr/testify v1.10.0
 	github.com/wasilibs/go-pgquery v0.0.0-20250219053243-148840c597e6
 	google.golang.org/grpc v1.71.0
