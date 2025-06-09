@@ -3,7 +3,7 @@ module github.com/gatewayd-io/gatewayd-plugin-sdk
 go 1.24
 
 require (
-	github.com/expr-lang/expr v1.17.3
+	github.com/expr-lang/expr v1.17.5
 	github.com/hashicorp/go-hclog v1.6.3
 	github.com/hashicorp/go-plugin v1.6.3
 	github.com/jackc/pgx/v5 v5.7.5
