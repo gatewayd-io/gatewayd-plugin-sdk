@@ -5,7 +5,7 @@ go 1.24
 require (
 	github.com/expr-lang/expr v1.17.5
 	github.com/hashicorp/go-hclog v1.6.3
-	github.com/hashicorp/go-plugin v1.6.3
+	github.com/hashicorp/go-plugin v1.7.0
 	github.com/jackc/pgx/v5 v5.7.5
 	github.com/pganalyze/pg_query_go/v6 v6.1.0
 	github.com/prometheus/client_golang v1.23.0
