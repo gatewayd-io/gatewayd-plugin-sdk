@@ -84,6 +84,10 @@ func DecodeBytes(encoded string) []byte {
 // This function should be called from onTrafficFromClient hook.
 func HandleClientMessage(req *v1.Struct, logger hclog.Logger) (*v1.Struct, error) {
 	request := req.Fields["request"].GetBytesValue()
+	if len(request) == 0 {
+		// Nothing to parse (e.g. client disconnected).
+		return req, nil
+	}
 	pgBackend := pgproto3.NewBackend(bytes.NewReader(request), nil)
 
 	if IsPostgresStartupMessage(request) {
